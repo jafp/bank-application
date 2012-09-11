@@ -18,4 +18,8 @@ public class Customer {
 	public List<Account> getAccounts() {
 		return accounts;
 	}
+
+	public void setNumber(long n) {
+		number = n;
+	}
 }
