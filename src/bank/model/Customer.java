@@ -6,4 +6,16 @@ public class Customer {
 	private Long number;
 	private String name;
 	private List<Account> accounts;
+	
+	public long getNumber() {
+		return number;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public List<Account> getAccounts() {
+		return accounts;
+	}
 }
