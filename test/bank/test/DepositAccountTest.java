@@ -12,7 +12,7 @@ public class DepositAccountTest {
 	private DepositAccount account;
 
 	@Before
-	public void createObject() {
+	public void before() {
 		account = new DepositAccount();
 	}
 	
@@ -32,7 +32,6 @@ public class DepositAccountTest {
 	@Test (expected = BankException.class)
 	public void testBankException() throws BankException {
 		account.deposit(50);
-		//throw new BankException("Test");
 		account.withdraw(100);
 	}
 
