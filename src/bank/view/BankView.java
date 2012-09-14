@@ -1,4 +1,5 @@
 package bank.view;
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -234,8 +235,7 @@ public class BankView extends javax.swing.JFrame {
 			{
 				listContainer = new JPanel();
 				getContentPane().add(listContainer);
-				FlowLayout listContainerLayout = new FlowLayout();
-				listContainerLayout.setAlignment(FlowLayout.RIGHT);
+				BorderLayout listContainerLayout = new BorderLayout();
 				listContainer.setLayout(listContainerLayout);
 				listContainer.setPreferredSize(new java.awt.Dimension(213, 270));
 				{
@@ -243,7 +243,7 @@ public class BankView extends javax.swing.JFrame {
 							new DefaultComboBoxModel(
 									new String[] { "Item One", "Item Two" });
 					customerLIst = new JList();
-					listContainer.add(customerLIst);
+					listContainer.add(customerLIst, BorderLayout.CENTER);
 					customerLIst.setModel(customerLIstModel);
 					customerLIst.setPreferredSize(new java.awt.Dimension(176, 236));
 				}
