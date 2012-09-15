@@ -1,37 +1,31 @@
 package bank.view;
 import java.awt.FlowLayout;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import javax.swing.WindowConstants;
-import javax.swing.SwingUtilities;
 
+import bank.controller.CustomerController;
 
-/**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
 public class CustomerView extends javax.swing.JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -88705056175278247L;
+	
+	private CustomerController customerController;
+
+	public JLabel nameLabel;
+	public JLabel depositBalance;
+	public JLabel loanBalance;
+	public JLabel overdraftBalance;
+	public JLabel overdraftLimit;
+
+	private JLabel depositBalanceLabel;
 	private JPanel headerContainer;
 	private JLabel depositLabel;
-	private JLabel depositBalanceLabel;
 	private JButton loanLoan;
 	private JButton loanDeposit;
-	private JLabel loanBalance;
 	private JLabel loanBalanceLabel;
 	private JPanel loanFunctionContainer;
 	private JLabel loanLabel;
@@ -43,8 +37,6 @@ public class CustomerView extends javax.swing.JFrame {
 	private JPanel loanButtomContainer;
 	private JButton overdraftWithdraw;
 	private JButton overdraftDeposit;
-	private JLabel overdraftBalance;
-	private JLabel overdraftLimit;
 	private JLabel overdraftLimitLabel;
 	private JPanel overdraftLimitContainer;
 	private JLabel overdraftBalanceLabel;
@@ -56,28 +48,14 @@ public class CustomerView extends javax.swing.JFrame {
 	private JPanel overdraftButtomContainer;
 	private JButton depositWithdraw;
 	private JButton depositDeposit;
-	private JLabel depositBalance;
 	private JPanel depositFunctionContainer;
 	private JPanel depositLabelContainer;
 	private JPanel depositContainer;
-	private JLabel nameLabel;
 	private JLabel welcomeLabel;
-
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				CustomerView inst = new CustomerView();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-			}
-		});
-	}
 	
-	public CustomerView() {
+	public CustomerView(CustomerController cc) {
 		super();
+		customerController = cc;
 		initGUI();
 	}
 	
@@ -149,12 +127,16 @@ public class CustomerView extends javax.swing.JFrame {
 							depositDeposit = new JButton();
 							depositButtomContainer.add(depositDeposit);
 							depositDeposit.setText("Deposit");
+							depositDeposit.setName("dd");
+							depositDeposit.addActionListener(customerController);
 						}
 						{
 							depositWithdraw = new JButton();
 							depositButtomContainer.add(depositWithdraw);
 							depositWithdraw.setText("Withdraw");
+							depositWithdraw.setName("dw");
 							depositWithdraw.setSize(75, 25);
+							depositWithdraw.addActionListener(customerController);
 						}
 					}
 				}
@@ -208,11 +190,15 @@ public class CustomerView extends javax.swing.JFrame {
 							loanDeposit = new JButton();
 							loanButtomContainer.add(loanDeposit);
 							loanDeposit.setText("Deposit");
+							loanDeposit.setName("ld");
+							loanDeposit.addActionListener(customerController);
 						}
 						{
 							loanLoan = new JButton();
 							loanButtomContainer.add(loanLoan);
 							loanLoan.setText("Loan");
+							loanLoan.setName("ll");
+							loanLoan.addActionListener(customerController);
 						}
 					}
 				}
@@ -283,11 +269,15 @@ public class CustomerView extends javax.swing.JFrame {
 							overdraftDeposit = new JButton();
 							overdraftButtomContainer.add(overdraftDeposit);
 							overdraftDeposit.setText("Deposit");
+							overdraftDeposit.setName("od");
+							overdraftDeposit.addActionListener(customerController);
 						}
 						{
 							overdraftWithdraw = new JButton();
 							overdraftButtomContainer.add(overdraftWithdraw);
 							overdraftWithdraw.setText("Withdraw");
+							overdraftWithdraw.setName("ow");
+							overdraftWithdraw.addActionListener(customerController);
 						}
 					}
 				}
@@ -299,5 +289,4 @@ public class CustomerView extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
-
 }

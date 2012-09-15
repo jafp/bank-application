@@ -1,57 +1,35 @@
 package bank.view;
 import java.awt.FlowLayout;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import javax.swing.WindowConstants;
-import javax.swing.SwingUtilities;
 
+import bank.controller.LoginController;
 
-/**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
 public class LoginView extends javax.swing.JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -3266899153926274082L;
+	
+	private LoginController loginController;
+	
+	public JTextField nameField;
+	public JPasswordField passwordField;
+	
 	private JPanel nameContainer;
 	private JButton loginButton;
-	private JPasswordField passwordField;
 	private JPanel loginContainer;
-	private JTextField nameField;
 	private JLabel passwordLabel;
 	private JPanel passwordContainer;
 	private JLabel nameLabel;
-
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				LoginView inst = new LoginView();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-			}
-		});
-	}
 	
-	public LoginView() {
+	public LoginView(LoginController lc) {
 		super();
+		loginController = lc;
 		initGUI();
 	}
 	
@@ -90,6 +68,7 @@ public class LoginView extends javax.swing.JFrame {
 					loginContainer.add(loginButton);
 					loginButton.setText("Login");
 					loginButton.setPreferredSize(new java.awt.Dimension(117, 29));
+					loginButton.addActionListener(loginController);
 				}
 			}
 			pack();
@@ -122,5 +101,4 @@ public class LoginView extends javax.swing.JFrame {
 		}
 		return passwordField;
 	}
-
 }

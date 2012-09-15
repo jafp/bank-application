@@ -1,25 +1,38 @@
 package bank.model;
 
-import java.util.List;
-
 public class Customer {
-	private Long number;
 	private String name;
-	private List<Account> accounts;
+	private String password;
 	
-	public long getNumber() {
-		return number;
+	private DepositAccount depositAccount;
+	private LoanAccount loanAccount;
+	private OverdraftAccount overdraftAccount;
+	
+	public Customer(String newName,String newPassword,double loanAmount, double overdraftLimit) {
+		name = newName;
+		password = newPassword;
+		depositAccount = new DepositAccount();
+		loanAccount = new LoanAccount(loanAmount,depositAccount);
+		overdraftAccount = new OverdraftAccount(overdraftLimit);
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public List<Account> getAccounts() {
-		return accounts;
+	public String getPassword() {
+		return password;
 	}
-
-	public void setNumber(long n) {
-		number = n;
+	
+	public DepositAccount getDA() {
+		return depositAccount;
+	}
+	
+	public LoanAccount getLA() {
+		return loanAccount;
+	}
+	
+	public OverdraftAccount getOA() {
+		return overdraftAccount;
 	}
 }

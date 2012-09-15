@@ -1,37 +1,31 @@
 package bank.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import bank.controller.BankController;
 
-/**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
 public class BankView extends javax.swing.JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3008784199281279137L;
+	
+	private BankController bankController;
+
+	public JTextField nameField;
+	public JPasswordField passwordField;
+	public JTextField loanField;
+	public JTextField overdraftField;
+	public JList customerList;
+	
 	private JPanel functionContainer;
 	private JPanel overdraftFieldContainer;
 	private JPanel overdraftLabelContainer;
@@ -41,48 +35,22 @@ public class BankView extends javax.swing.JFrame {
 	private JPanel passwordLabelContainer;
 	private JPanel nameFieldContainer;
 	private JPanel nameLabelContainer;
-	private JTextField overdraftField;
+	public JLabel nameLabel;
 	private JLabel overdraftLabel;
-	private JTextField loanField;
 	private JLabel loanLabel;
-	private JPasswordField passwordField;
 	private JLabel passwordLabel;
 	private JButton addButton;
-	private JTextField nameField;
-	private JLabel nameLabel;
 	private JPanel overdraftContainer;
 	private JPanel loanContainer;
 	private JPanel passwordContainer;
 	private JPanel nameContainer;
 	private JButton deleteButton;
 	private JPanel buttonContainer;
-	private JList customerLIst;
 	private JPanel listContainer;
-
-	{
-		//Set Look & Feel
-		try {
-			javax.swing.UIManager.setLookAndFeel("com.jgoodies.looks.plastic.PlasticLookAndFeel");
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				BankView inst = new BankView();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-			}
-		});
-	}
 	
-	public BankView() {
+	public BankView(BankController bc) {
 		super();
+		bankController = bc;
 		initGUI();
 	}
 	
@@ -104,11 +72,13 @@ public class BankView extends javax.swing.JFrame {
 						addButton = new JButton();
 						buttonContainer.add(addButton);
 						addButton.setText("Add");
+						addButton.addActionListener(bankController);
 					}
 					{
 						deleteButton = new JButton();
 						buttonContainer.add(deleteButton);
 						deleteButton.setText("Delete");
+						deleteButton.addActionListener(bankController);
 					}
 				}
 				{
@@ -239,13 +209,12 @@ public class BankView extends javax.swing.JFrame {
 				listContainer.setLayout(listContainerLayout);
 				listContainer.setPreferredSize(new java.awt.Dimension(213, 270));
 				{
-					ListModel customerLIstModel = 
-							new DefaultComboBoxModel(
-									new String[] { "Item One", "Item Two" });
-					customerLIst = new JList();
-					listContainer.add(customerLIst, BorderLayout.CENTER);
-					customerLIst.setModel(customerLIstModel);
-					customerLIst.setPreferredSize(new java.awt.Dimension(176, 236));
+					DefaultListModel customerListModel = new DefaultListModel();
+					
+					customerList = new JList();
+					listContainer.add(customerList, BorderLayout.CENTER);
+					customerList.setModel(customerListModel);
+					customerList.setPreferredSize(new java.awt.Dimension(176, 236));
 				}
 			}
 			pack();
@@ -255,5 +224,4 @@ public class BankView extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
-
 }
