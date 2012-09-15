@@ -24,7 +24,6 @@ public class AmountView extends javax.swing.JFrame {
 		super();
 		customerController = cc;
 		initGUI();
-		setVisible(true);
 	}
 	
 	private void initGUI() {
