@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 
 import bank.model.Bank;
+import bank.model.BankException;
 import bank.model.Customer;
 import bank.view.BankView;
 
@@ -23,14 +24,34 @@ public class BankController implements ActionListener {
 	}
 	
 	public void addCustomer() {
-		Customer newCustomer = new Customer(
-				bankView.nameField.getText(),
-				new String(bankView.passwordField.getPassword()),
-				Double.parseDouble(bankView.loanField.getText()),
-				Double.parseDouble(bankView.overdraftField.getText())
-				);
-		bankModel.addCustomer(newCustomer);
-		updateList();
+		try {
+			String name = bankView.nameField.getText().toLowerCase();
+			boolean already_exists = false;
+			for(Customer c : bankModel.getCustomers()) {
+				System.out.println();
+				if(c.getName().equals(name)) {
+					already_exists = true;
+				}
+			}
+			if(already_exists == true) {
+				throw new BankException("A customer with the name "+name+" already exists!");
+			}
+			else {
+				Customer newCustomer = new Customer(
+						name,
+						new String(bankView.passwordField.getPassword()),
+						Double.parseDouble(bankView.loanField.getText()),
+						Double.parseDouble(bankView.overdraftField.getText())
+						);
+				bankModel.addCustomer(newCustomer);
+			}
+		}
+		catch (BankException e) {
+			new ErrorController(e);
+		}
+		finally {
+			updateList();
+		}
 	}
 	
 	public void deleteCustomer() {

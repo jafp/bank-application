@@ -63,7 +63,7 @@ public class CustomerController implements ActionListener {
 			}
 		}
 		catch(BankException e) {
-			System.out.println(e.getMessage());
+			new ErrorController(e);
 		}
 		finally {
 			updateFields();
