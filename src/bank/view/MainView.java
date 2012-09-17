@@ -1,5 +1,6 @@
 package bank.view;
 import java.awt.BorderLayout;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -7,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import bank.controller.MainController;
+import bank.controller.SaveController;
 
 public class MainView extends javax.swing.JFrame {
 
@@ -23,8 +25,9 @@ public class MainView extends javax.swing.JFrame {
 	private JButton customerViewButton;
 	private JPanel customerButtonContainer;
 	
-	public MainView(MainController mc) {
+	public MainView(MainController mc, SaveController sc) {
 		super();
+		this.addWindowListener(sc);
 		mainController = mc;
 		initGUI();
 		setVisible(true);

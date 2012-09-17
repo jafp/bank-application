@@ -23,15 +23,19 @@ public class LoginController implements ActionListener {
 	
 	public void login() {
 		try {
+			boolean notFound = true;
 			if(bankModel.getCustomers().size() != 0) {
 				for(Customer c : bankModel.getCustomers()) {
 					if(
 						loginView.nameField.getText().toLowerCase().equals(c.getName()) && 
 						new String(loginView.passwordField.getPassword()).equals(c.getPassword())) {
+						notFound = false;
 						new CustomerController(c);
 						loginView.setVisible(false);
 					}
-					else throw new BankException("Wrong login information!");
+				}
+				if(notFound == true) {
+					throw new BankException("Wrong login information!");
 				}
 			}
 			else throw new BankException("No customers are registered in the system!");

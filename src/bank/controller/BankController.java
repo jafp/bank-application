@@ -17,6 +17,7 @@ public class BankController implements ActionListener {
 	
 	public BankController() {
 		bankView = new BankView(this);
+		updateList();
 	}
 	
 	public void setVisible() {

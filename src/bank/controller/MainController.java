@@ -9,9 +9,10 @@ public class MainController implements ActionListener {
 	
 	private BankController bankController;
 	private LoginController loginController;
+	private SaveController saveController = new SaveController();
 	
 	public MainController() {
-		new MainView(this);
+		new MainView(this,saveController);
 	}
 	
 	public void bankViewButtonActionPerformed() {
