@@ -13,8 +13,8 @@ public class LoginController implements ActionListener {
 	private Bank bankModel = Bank.instance();
 	private LoginView loginView;
 	
-	public LoginController() {
-		loginView = new LoginView(this);
+	public LoginController(MainController mc) {
+		loginView = new LoginView(this,mc);
 	}
 	
 	public void setVisible() {

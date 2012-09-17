@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import bank.controller.LoginController;
+import bank.controller.MainController;
 
 public class LoginView extends javax.swing.JFrame {
 
@@ -27,8 +28,9 @@ public class LoginView extends javax.swing.JFrame {
 	private JPanel passwordContainer;
 	private JLabel nameLabel;
 	
-	public LoginView(LoginController lc) {
+	public LoginView(LoginController lc, MainController mc) {
 		super();
+		this.addWindowListener(mc);
 		loginController = lc;
 		initGUI();
 	}

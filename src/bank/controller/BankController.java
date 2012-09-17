@@ -15,8 +15,8 @@ public class BankController implements ActionListener {
 	private BankView bankView;
 	private Bank bankModel = Bank.instance();
 	
-	public BankController() {
-		bankView = new BankView(this);
+	public BankController(MainController mc) {
+		bankView = new BankView(this,mc);
 		updateList();
 	}
 	
@@ -38,13 +38,18 @@ public class BankController implements ActionListener {
 				throw new BankException("A customer with the name "+name+" already exists!");
 			}
 			else {
-				Customer newCustomer = new Customer(
-						name,
-						new String(bankView.passwordField.getPassword()),
-						Double.parseDouble(bankView.loanField.getText()),
-						Double.parseDouble(bankView.overdraftField.getText())
-						);
-				bankModel.addCustomer(newCustomer);
+				try {
+					Customer newCustomer = new Customer(
+							name,
+							new String(bankView.passwordField.getPassword()),
+							Double.parseDouble(bankView.loanField.getText()),
+							Double.parseDouble(bankView.overdraftField.getText())
+							);
+					bankModel.addCustomer(newCustomer);
+				}
+				catch (Exception e)  {
+					throw new BankException("All fields needs to be filled!");
+				}
 			}
 		}
 		catch (BankException e) {

@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import bank.controller.BankController;
+import bank.controller.MainController;
 
 public class BankView extends javax.swing.JFrame {
 
@@ -48,8 +49,9 @@ public class BankView extends javax.swing.JFrame {
 	private JPanel buttonContainer;
 	private JPanel listContainer;
 	
-	public BankView(BankController bc) {
+	public BankView(BankController bc, MainController mc) {
 		super();
+		this.addWindowListener(mc);
 		bankController = bc;
 		initGUI();
 	}

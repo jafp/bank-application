@@ -50,9 +50,6 @@ public class SaveController implements WindowListener {
 			new ErrorController(exc);
 		}
 		finally {
-			for(Customer c : bankModel.getCustomers()) {
-				System.out.println(c.getName());
-			}
 			if(input != null) {
 				input.close();
 			}
