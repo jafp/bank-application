@@ -24,7 +24,7 @@ public class BankView extends javax.swing.JFrame {
 	public JPasswordField passwordField;
 	public JTextField loanField;
 	public JTextField overdraftField;
-	public JList customerList;
+	public JList<String> customerList;
 	
 	private JPanel functionContainer;
 	private JPanel overdraftFieldContainer;
@@ -209,9 +209,9 @@ public class BankView extends javax.swing.JFrame {
 				listContainer.setLayout(listContainerLayout);
 				listContainer.setPreferredSize(new java.awt.Dimension(213, 270));
 				{
-					DefaultListModel customerListModel = new DefaultListModel();
+					DefaultListModel<String> customerListModel = new DefaultListModel<String>();
 					
-					customerList = new JList();
+					customerList = new JList<String>();
 					listContainer.add(customerList, BorderLayout.CENTER);
 					customerList.setModel(customerListModel);
 					customerList.setPreferredSize(new java.awt.Dimension(176, 236));

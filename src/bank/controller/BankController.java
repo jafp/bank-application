@@ -67,7 +67,7 @@ public class BankController implements ActionListener {
 	}
 	
 	public void updateList() {
-		DefaultListModel model = (DefaultListModel) bankView.customerList.getModel();
+		DefaultListModel<String> model = (DefaultListModel<String>) bankView.customerList.getModel();
 		model.clear();
 		for(Customer c : bankModel.getCustomers()) {
 			model.addElement(c.getName());
