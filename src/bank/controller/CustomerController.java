@@ -18,9 +18,9 @@ public class CustomerController implements ActionListener {
 	
 	private String method;
 	
-	public CustomerController(Customer c) {
+	public CustomerController(Customer c, MainController mc) {
 		customer = c;
-		customerView = new CustomerView(this);
+		customerView = new CustomerView(this,mc);
 		amountView = new AmountView(this);
 		customerView.setVisible(true);
 		updateFields();

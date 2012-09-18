@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import bank.controller.CustomerController;
+import bank.controller.MainController;
 
 public class CustomerView extends javax.swing.JFrame {
 
@@ -53,8 +54,9 @@ public class CustomerView extends javax.swing.JFrame {
 	private JPanel depositContainer;
 	private JLabel welcomeLabel;
 	
-	public CustomerView(CustomerController cc) {
+	public CustomerView(CustomerController cc, MainController mc) {
 		super();
+		this.addWindowListener(mc);
 		customerController = cc;
 		initGUI();
 	}

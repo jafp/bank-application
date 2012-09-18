@@ -10,10 +10,12 @@ import bank.view.LoginView;
 
 public class LoginController implements ActionListener {
 	
+	private MainController mainController;
 	private Bank bankModel = Bank.instance();
 	private LoginView loginView;
 	
 	public LoginController(MainController mc) {
+		mainController = mc;
 		loginView = new LoginView(this,mc);
 	}
 	
@@ -30,7 +32,7 @@ public class LoginController implements ActionListener {
 						loginView.nameField.getText().toLowerCase().equals(c.getName()) && 
 						new String(loginView.passwordField.getPassword()).equals(c.getPassword())) {
 						notFound = false;
-						new CustomerController(c);
+						new CustomerController(c,mainController);
 						loginView.setVisible(false);
 					}
 				}
