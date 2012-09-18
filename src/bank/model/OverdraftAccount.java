@@ -1,5 +1,8 @@
 package bank.model;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class OverdraftAccount extends Account implements Depositable,Withdrawable {
 	
 	private Account account = new Account();

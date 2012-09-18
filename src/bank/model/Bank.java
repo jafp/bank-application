@@ -1,7 +1,9 @@
 package bank.model;
-
 import java.util.ArrayList;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class Bank {
 	
 	private static Bank instance;

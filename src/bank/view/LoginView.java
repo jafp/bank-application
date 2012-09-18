@@ -12,6 +12,9 @@ import javax.swing.WindowConstants;
 import bank.controller.LoginController;
 import bank.controller.MainController;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class LoginView extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = -3266899153926274082L;

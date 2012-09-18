@@ -1,10 +1,12 @@
 package bank.controller;
-
 import java.io.IOException;
 
 import bank.model.BankException;
 import bank.view.ErrorView;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class ErrorController {
 	
 	private ErrorView errorView;

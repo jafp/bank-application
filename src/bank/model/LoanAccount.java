@@ -1,5 +1,8 @@
 package bank.model;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class LoanAccount extends Account implements Depositable {
 	
 	private Account account;

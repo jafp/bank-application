@@ -1,5 +1,8 @@
 package bank.model;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class Customer {
 	private String name;
 	private String password;

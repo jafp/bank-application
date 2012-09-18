@@ -1,12 +1,14 @@
 package bank.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class ErrorView extends javax.swing.JFrame {
 	
 	private static final long serialVersionUID = 1L;

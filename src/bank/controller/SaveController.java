@@ -1,5 +1,4 @@
 package bank.controller;
-
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -10,6 +9,9 @@ import java.util.Scanner;
 import bank.model.Bank;
 import bank.model.Customer;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class SaveController implements WindowListener {
 	
 	private File file;

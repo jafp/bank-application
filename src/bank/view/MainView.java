@@ -10,6 +10,9 @@ import javax.swing.WindowConstants;
 import bank.controller.MainController;
 import bank.controller.SaveController;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class MainView extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 7775858109106280751L;

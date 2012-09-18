@@ -1,5 +1,4 @@
 package bank.controller;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +9,9 @@ import bank.model.Customer;
 import bank.view.AmountView;
 import bank.view.CustomerView;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class CustomerController implements ActionListener {
 	
 	private Customer customer;

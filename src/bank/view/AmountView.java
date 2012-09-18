@@ -8,6 +8,9 @@ import javax.swing.WindowConstants;
 
 import bank.controller.CustomerController;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class AmountView extends javax.swing.JFrame {
 	
 	private static final long serialVersionUID = 8822570419338127412L;

@@ -15,6 +15,9 @@ import javax.swing.WindowConstants;
 import bank.controller.BankController;
 import bank.controller.MainController;
 
+/**
+ * @authors Pierre Zabell, Jacob Pedersen
+ */
 public class BankView extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = -3008784199281279137L;
