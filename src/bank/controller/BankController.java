@@ -31,7 +31,6 @@ public class BankController implements ActionListener {
 			String name = bankView.nameField.getText().toLowerCase();
 			boolean already_exists = false;
 			for(Customer c : bankModel.getCustomers()) {
-				System.out.println();
 				if(c.getName().equals(name)) {
 					already_exists = true;
 				}
