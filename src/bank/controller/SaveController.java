@@ -22,7 +22,9 @@ public class SaveController implements WindowListener {
 	private Bank bankModel = Bank.instance();
 
 	public SaveController() {
-		file = new File("bankdata");
+		String rawPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+		String path = rawPath.substring(0, rawPath.lastIndexOf("/")+1);
+		file = new File(path+"bankdata");
 		try {
 			if(!file.exists()) {
 				file.createNewFile();
