@@ -73,11 +73,11 @@ public class CustomerController implements ActionListener {
 	}
 	
 	public void updateFields() {
-		customerView.nameLabel.setText(customer.getName());
-		customerView.depositBalance.setText(Double.toString(customer.getDA().getBalance()));
-		customerView.loanBalance.setText(Double.toString(customer.getLA().getBalance()));
-		customerView.overdraftBalance.setText(Double.toString(customer.getOA().getBalance()));
-		customerView.overdraftLimit.setText(Double.toString(customer.getOA().getOverdraftLimit()));
+		customerView.getNameLabel().setText(customer.getName());
+		customerView.getDepositBalance().setText(Double.toString(customer.getDA().getBalance()));
+		customerView.getLoanBalance().setText(Double.toString(customer.getLA().getBalance()));
+		customerView.getOverdraftBalance().setText(Double.toString(customer.getOA().getBalance()));
+		customerView.getOverdraftLimit().setText(Double.toString(customer.getOA().getOverdraftLimit()));
 	}
 
 	@Override

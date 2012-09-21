@@ -1,5 +1,6 @@
 package bank.view;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,16 +16,21 @@ import bank.controller.MainController;
  */
 public class CustomerView extends javax.swing.JFrame {
 
+	/** Auto-generated to avoid warnings */
 	private static final long serialVersionUID = -88705056175278247L;
+	/** Font size for headers */
+	private static final Font HEADER_FONT = new Font("Sans Serif", Font.BOLD, 16);
+	/** Font size for "items" */
+	private static final Font ITEM_FONT = new Font("Sans Serif", Font.PLAIN, 12);
 	
+	/** The controller responsible for this view */
 	private CustomerController customerController;
-
-	public JLabel nameLabel;
-	public JLabel depositBalance;
-	public JLabel loanBalance;
-	public JLabel overdraftBalance;
-	public JLabel overdraftLimit;
-
+	
+	private JLabel nameLabel;
+	private JLabel depositBalance;
+	private JLabel loanBalance;
+	private JLabel overdraftBalance;
+	private JLabel overdraftLimit;
 	private JLabel depositBalanceLabel;
 	private JPanel headerContainer;
 	private JLabel depositLabel;
@@ -74,13 +80,14 @@ public class CustomerView extends javax.swing.JFrame {
 				getContentPane().add(headerContainer);
 				{
 					welcomeLabel = new JLabel();
+			
 					headerContainer.add(welcomeLabel);
 					welcomeLabel.setText("Welcome");
 				}
 				{
-					nameLabel = new JLabel();
-					headerContainer.add(nameLabel);
-					nameLabel.setText("<name>");
+					setNameLabel(new JLabel());
+					headerContainer.add(getNameLabel());
+					getNameLabel().setText("<name>");
 				}
 			}
 			{
@@ -96,6 +103,7 @@ public class CustomerView extends javax.swing.JFrame {
 					depositLabelContainer.setLayout(jPanel3Layout);
 					{
 						depositLabel = new JLabel();
+						depositLabel.setFont(HEADER_FONT);
 						depositLabelContainer.add(depositLabel);
 						depositLabel.setText("Deposit Account");
 					}
@@ -113,13 +121,15 @@ public class CustomerView extends javax.swing.JFrame {
 						depositBalanceContainer.setLayout(depositBalanceContainerLayout);
 						{
 							depositBalanceLabel = new JLabel();
+							depositBalanceLabel.setFont(ITEM_FONT);
 							depositBalanceContainer.add(depositBalanceLabel);
 							depositBalanceLabel.setText("Balance:");
 						}
 						{
-							depositBalance = new JLabel();
-							depositBalanceContainer.add(depositBalance);
-							depositBalance.setText("<balance>");
+							setDepositBalance(new JLabel());
+							getDepositBalance().setFont(ITEM_FONT);
+							depositBalanceContainer.add(getDepositBalance());
+							getDepositBalance().setText("<balance>");
 						}
 					}
 					{
@@ -159,6 +169,7 @@ public class CustomerView extends javax.swing.JFrame {
 					loanLabelContainer.setLayout(loanLabelContainerLayout);
 					{
 						loanLabel = new JLabel();
+						loanLabel.setFont(HEADER_FONT);
 						loanLabelContainer.add(loanLabel);
 						loanLabel.setText("Loan Account");
 					}
@@ -176,13 +187,15 @@ public class CustomerView extends javax.swing.JFrame {
 						loanBalanceContainer.setLayout(loanBalanceContainerLayout);
 						{
 							loanBalanceLabel = new JLabel();
+							loanBalanceLabel.setFont(ITEM_FONT);
 							loanBalanceContainer.add(loanBalanceLabel);
 							loanBalanceLabel.setText("Balance:");
 						}
 						{
-							loanBalance = new JLabel();
-							loanBalanceContainer.add(loanBalance);
-							loanBalance.setText("<balance>");
+							setLoanBalance(new JLabel());
+							getLoanBalance().setFont(ITEM_FONT);
+							loanBalanceContainer.add(getLoanBalance());
+							getLoanBalance().setText("<balance>");
 						}
 					}
 					{
@@ -221,6 +234,7 @@ public class CustomerView extends javax.swing.JFrame {
 					overdraftLabelContainer.setLayout(overdraftLabelContainerLayout);
 					{
 						overdraftLabel = new JLabel();
+						overdraftLabel.setFont(HEADER_FONT);
 						overdraftLabelContainer.add(overdraftLabel);
 						overdraftLabel.setText("Overdraft Account");
 					}
@@ -233,13 +247,15 @@ public class CustomerView extends javax.swing.JFrame {
 					overdraftLimitContainer.setLayout(overdraftLimitContainerLayout);
 					{
 						overdraftLimitLabel = new JLabel();
+						overdraftLimitLabel.setFont(ITEM_FONT);
 						overdraftLimitContainer.add(overdraftLimitLabel);
 						overdraftLimitLabel.setText("Overdraft Limit:");
 					}
 					{
-						overdraftLimit = new JLabel();
-						overdraftLimitContainer.add(overdraftLimit);
-						overdraftLimit.setText("<limit>");
+						setOverdraftLimit(new JLabel());
+						getOverdraftLimit().setFont(ITEM_FONT);
+						overdraftLimitContainer.add(getOverdraftLimit());
+						getOverdraftLimit().setText("<limit>");
 					}
 				}
 				{
@@ -255,13 +271,15 @@ public class CustomerView extends javax.swing.JFrame {
 						overdraftBalanceContainer.setLayout(overdraftBalanceContainerLayout);
 						{
 							overdraftBalanceLabel = new JLabel();
+							overdraftBalanceLabel.setFont(ITEM_FONT);
 							overdraftBalanceContainer.add(overdraftBalanceLabel);
 							overdraftBalanceLabel.setText("Balance:");
 						}
 						{
-							overdraftBalance = new JLabel();
-							overdraftBalanceContainer.add(overdraftBalance);
-							overdraftBalance.setText("<balance>");
+							setOverdraftBalance(new JLabel());
+							getOverdraftBalance().setFont(ITEM_FONT);
+							overdraftBalanceContainer.add(getOverdraftBalance());
+							getOverdraftBalance().setText("<balance>");
 						}
 					}
 					{
@@ -293,5 +311,45 @@ public class CustomerView extends javax.swing.JFrame {
 		    //add your error handling code here
 			e.printStackTrace();
 		}
+	}
+
+	public JLabel getNameLabel() {
+		return nameLabel;
+	}
+
+	public void setNameLabel(JLabel nameLabel) {
+		this.nameLabel = nameLabel;
+	}
+
+	public JLabel getDepositBalance() {
+		return depositBalance;
+	}
+
+	public void setDepositBalance(JLabel depositBalance) {
+		this.depositBalance = depositBalance;
+	}
+
+	public JLabel getLoanBalance() {
+		return loanBalance;
+	}
+
+	public void setLoanBalance(JLabel loanBalance) {
+		this.loanBalance = loanBalance;
+	}
+
+	public JLabel getOverdraftBalance() {
+		return overdraftBalance;
+	}
+
+	public void setOverdraftBalance(JLabel overdraftBalance) {
+		this.overdraftBalance = overdraftBalance;
+	}
+
+	public JLabel getOverdraftLimit() {
+		return overdraftLimit;
+	}
+
+	public void setOverdraftLimit(JLabel overdraftLimit) {
+		this.overdraftLimit = overdraftLimit;
 	}
 }
