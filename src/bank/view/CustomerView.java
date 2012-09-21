@@ -1,5 +1,6 @@
 package bank.view;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,7 +19,10 @@ public class CustomerView extends javax.swing.JFrame {
 	private static final long serialVersionUID = -88705056175278247L;
 	
 	private CustomerController customerController;
-
+	
+	private static final Font HEADER_FONT = new Font("Sans Serif", Font.BOLD, 16);
+	private static final Font ITEM_FONT = new Font("Sans Serif", Font.PLAIN, 12);
+	
 	public JLabel nameLabel;
 	public JLabel depositBalance;
 	public JLabel loanBalance;
@@ -74,6 +78,7 @@ public class CustomerView extends javax.swing.JFrame {
 				getContentPane().add(headerContainer);
 				{
 					welcomeLabel = new JLabel();
+			
 					headerContainer.add(welcomeLabel);
 					welcomeLabel.setText("Welcome");
 				}
@@ -96,6 +101,7 @@ public class CustomerView extends javax.swing.JFrame {
 					depositLabelContainer.setLayout(jPanel3Layout);
 					{
 						depositLabel = new JLabel();
+						depositLabel.setFont(HEADER_FONT);
 						depositLabelContainer.add(depositLabel);
 						depositLabel.setText("Deposit Account");
 					}
@@ -113,11 +119,13 @@ public class CustomerView extends javax.swing.JFrame {
 						depositBalanceContainer.setLayout(depositBalanceContainerLayout);
 						{
 							depositBalanceLabel = new JLabel();
+							depositBalanceLabel.setFont(ITEM_FONT);
 							depositBalanceContainer.add(depositBalanceLabel);
 							depositBalanceLabel.setText("Balance:");
 						}
 						{
 							depositBalance = new JLabel();
+							depositBalance.setFont(ITEM_FONT);
 							depositBalanceContainer.add(depositBalance);
 							depositBalance.setText("<balance>");
 						}
@@ -159,6 +167,7 @@ public class CustomerView extends javax.swing.JFrame {
 					loanLabelContainer.setLayout(loanLabelContainerLayout);
 					{
 						loanLabel = new JLabel();
+						loanLabel.setFont(HEADER_FONT);
 						loanLabelContainer.add(loanLabel);
 						loanLabel.setText("Loan Account");
 					}
@@ -176,11 +185,13 @@ public class CustomerView extends javax.swing.JFrame {
 						loanBalanceContainer.setLayout(loanBalanceContainerLayout);
 						{
 							loanBalanceLabel = new JLabel();
+							loanBalanceLabel.setFont(ITEM_FONT);
 							loanBalanceContainer.add(loanBalanceLabel);
 							loanBalanceLabel.setText("Balance:");
 						}
 						{
 							loanBalance = new JLabel();
+							loanBalance.setFont(ITEM_FONT);
 							loanBalanceContainer.add(loanBalance);
 							loanBalance.setText("<balance>");
 						}
@@ -221,6 +232,7 @@ public class CustomerView extends javax.swing.JFrame {
 					overdraftLabelContainer.setLayout(overdraftLabelContainerLayout);
 					{
 						overdraftLabel = new JLabel();
+						overdraftLabel.setFont(HEADER_FONT);
 						overdraftLabelContainer.add(overdraftLabel);
 						overdraftLabel.setText("Overdraft Account");
 					}
@@ -233,11 +245,13 @@ public class CustomerView extends javax.swing.JFrame {
 					overdraftLimitContainer.setLayout(overdraftLimitContainerLayout);
 					{
 						overdraftLimitLabel = new JLabel();
+						overdraftLimitLabel.setFont(ITEM_FONT);
 						overdraftLimitContainer.add(overdraftLimitLabel);
 						overdraftLimitLabel.setText("Overdraft Limit:");
 					}
 					{
 						overdraftLimit = new JLabel();
+						overdraftLimit.setFont(ITEM_FONT);
 						overdraftLimitContainer.add(overdraftLimit);
 						overdraftLimit.setText("<limit>");
 					}
@@ -255,11 +269,13 @@ public class CustomerView extends javax.swing.JFrame {
 						overdraftBalanceContainer.setLayout(overdraftBalanceContainerLayout);
 						{
 							overdraftBalanceLabel = new JLabel();
+							overdraftBalanceLabel.setFont(ITEM_FONT);
 							overdraftBalanceContainer.add(overdraftBalanceLabel);
 							overdraftBalanceLabel.setText("Balance:");
 						}
 						{
 							overdraftBalance = new JLabel();
+							overdraftBalance.setFont(ITEM_FONT);
 							overdraftBalanceContainer.add(overdraftBalance);
 							overdraftBalance.setText("<balance>");
 						}
