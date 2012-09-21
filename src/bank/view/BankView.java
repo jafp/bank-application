@@ -229,4 +229,11 @@ public class BankView extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clearFields() {
+		nameField.setText("");
+		passwordField.setText("");
+		loanField.setText("");
+		overdraftField.setText("");
+	}
 }

@@ -57,6 +57,7 @@ public class BankController implements ActionListener {
 			new ErrorController(e);
 		}
 		finally {
+			bankView.clearFields();
 			updateList();
 		}
 	}
