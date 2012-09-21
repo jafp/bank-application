@@ -17,8 +17,7 @@ public class AmountView extends javax.swing.JFrame {
 	
 	private CustomerController customerController;
 	
-	public JTextField amountField;
-	
+	private JTextField amountField;
 	private JPanel amountContainer;
 	private JLabel amountLabel;
 	private JButton submitAmount;
@@ -44,9 +43,9 @@ public class AmountView extends javax.swing.JFrame {
 					amountLabel.setText("Enter Amount:");
 				}
 				{
-					amountField = new JTextField();
-					amountContainer.add(amountField);
-					amountField.setPreferredSize(new java.awt.Dimension(250, 30));
+					setAmountField(new JTextField());
+					amountContainer.add(getAmountField());
+					getAmountField().setPreferredSize(new java.awt.Dimension(250, 30));
 				}
 				{
 					submitAmount = new JButton();
@@ -62,5 +61,13 @@ public class AmountView extends javax.swing.JFrame {
 		    //add your error handling code here
 			e.printStackTrace();
 		}
+	}
+
+	public JTextField getAmountField() {
+		return amountField;
+	}
+
+	public void setAmountField(JTextField amountField) {
+		this.amountField = amountField;
 	}
 }

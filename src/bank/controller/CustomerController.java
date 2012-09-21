@@ -41,7 +41,7 @@ public class CustomerController implements ActionListener {
 	}
 	
 	public void updateAccount(Account account, Action method) {
-		double amount = Double.parseDouble(amountView.amountField.getText());
+		double amount = Double.parseDouble(amountView.getAmountField().getText());
 		try {
 			switch(account) {
 			case DEPOSIT:
@@ -104,6 +104,7 @@ public class CustomerController implements ActionListener {
 		String command = ((JButton) e.getSource()).getName();
 		
 		amountView.setVisible(true);
+		amountView.getAmountField().setText("");
 		
 		if(command.equals("Submit")) {
 			if(method.equals("dd")) updateAccount(Account.DEPOSIT, Action.DEPOSIT);
