@@ -28,15 +28,15 @@ public class BankController implements ActionListener {
 	
 	public void addCustomer() {
 		try {
-			String name = bankView.nameField.getText().toLowerCase();
-			boolean already_exists = false;
+			String name = bankView.nameField.getText();
+			boolean alreadyExists = false;
 			for(Customer c : bankModel.getCustomers()) {
-				if(c.getName().equals(name)) {
-					already_exists = true;
+				if(c.getName().toLowerCase().equals(name.toLowerCase())) {
+					alreadyExists = true;
 				}
 			}
-			if(already_exists == true) {
-				throw new BankException("A customer with the name "+name+" already exists!");
+			if(alreadyExists == true) {
+				throw new BankException("A customer with the name " + name + " already exists!");
 			}
 			else {
 				try {

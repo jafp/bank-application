@@ -69,7 +69,7 @@ public class BankView extends javax.swing.JFrame {
 				getContentPane().add(functionContainer);
 				BoxLayout functionContainerLayout = new BoxLayout(functionContainer, javax.swing.BoxLayout.Y_AXIS);
 				functionContainer.setLayout(functionContainerLayout);
-				functionContainer.setPreferredSize(new java.awt.Dimension(224, 270));
+				functionContainer.setPreferredSize(new java.awt.Dimension(320, 270));
 				{
 					buttonContainer = new JPanel();
 					functionContainer.add(buttonContainer);
@@ -112,7 +112,7 @@ public class BankView extends javax.swing.JFrame {
 						{
 							nameField = new JTextField();
 							nameFieldContainer.add(nameField);
-							nameField.setPreferredSize(new java.awt.Dimension(115, 22));
+							nameField.setPreferredSize(new java.awt.Dimension(120, 22));
 						}
 					}
 				}
@@ -142,7 +142,7 @@ public class BankView extends javax.swing.JFrame {
 						{
 							passwordField = new JPasswordField();
 							passwordFieldContainer.add(passwordField);
-							passwordField.setPreferredSize(new java.awt.Dimension(115, 22));
+							passwordField.setPreferredSize(new java.awt.Dimension(120, 22));
 						}
 					}
 				}
@@ -172,7 +172,7 @@ public class BankView extends javax.swing.JFrame {
 						{
 							loanField = new JTextField();
 							loanFieldContainer.add(loanField);
-							loanField.setPreferredSize(new java.awt.Dimension(80, 22));
+							loanField.setPreferredSize(new java.awt.Dimension(120, 22));
 						}
 					}
 				}
@@ -202,7 +202,7 @@ public class BankView extends javax.swing.JFrame {
 						{
 							overdraftField = new JTextField();
 							overdraftFieldContainer.add(overdraftField);
-							overdraftField.setPreferredSize(new java.awt.Dimension(80, 22));
+							overdraftField.setPreferredSize(new java.awt.Dimension(120, 22));
 						}
 					}
 				}
