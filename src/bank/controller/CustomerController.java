@@ -14,6 +14,18 @@ import bank.view.CustomerView;
  */
 public class CustomerController implements ActionListener {
 	
+	private enum Action {
+		DEPOSIT,
+		WITHDRAW,
+		LOAN
+	};
+	
+	private enum Account {
+		DEPOSIT,
+		LOAN,
+		OVERDRAFT
+	};
+	
 	private Customer customer;
 	private CustomerView customerView;
 	private AmountView amountView;
@@ -28,38 +40,44 @@ public class CustomerController implements ActionListener {
 		updateFields();
 	}
 	
-	public void updateAccount(int account, int method) {
+	public void updateAccount(Account account, Action method) {
 		double amount = Double.parseDouble(amountView.amountField.getText());
 		try {
 			switch(account) {
-			case 1:
+			case DEPOSIT:
 				switch(method) {
-				case 1:
-					customer.getDA().deposit(amount);
-					break;
-				case 2:
-					customer.getDA().withdraw(amount);
-					break;
+					case DEPOSIT:
+						customer.getDA().deposit(amount);
+						break;
+					case WITHDRAW:
+						customer.getDA().withdraw(amount);
+						break;
+					default:
+						break;
 				}
 				break;
-			case 2:
+			case LOAN:
 				switch(method) {
-				case 1:
-					customer.getLA().deposit(amount);
-					break;
-				case 2:
-					customer.getLA().loan(amount);
-					break;
+					case DEPOSIT:
+						customer.getLA().deposit(amount);
+						break;
+					case LOAN:
+						customer.getLA().loan(amount);
+						break;
+					default:
+						break;
 				}
 				break;
-			case 3:
+			case OVERDRAFT:
 				switch(method) {
-				case 1:
-					customer.getOA().deposit(amount);
-					break;
-				case 2:
-					customer.getOA().withdraw(amount);
-					break;
+					case DEPOSIT:
+						customer.getOA().deposit(amount);
+						break;
+					case WITHDRAW:
+						customer.getOA().withdraw(amount);
+						break;
+					default:
+						break;
 				}
 				break;
 			}
@@ -88,12 +106,12 @@ public class CustomerController implements ActionListener {
 		amountView.setVisible(true);
 		
 		if(command.equals("Submit")) {
-			if(method.equals("dd")) updateAccount(1,1);
-			if(method.equals("dw")) updateAccount(1,2);
-			if(method.equals("ld")) updateAccount(2,1);
-			if(method.equals("ll")) updateAccount(2,2);
-			if(method.equals("od")) updateAccount(3,1);
-			if(method.equals("ow")) updateAccount(3,2);
+			if(method.equals("dd")) updateAccount(Account.DEPOSIT, Action.DEPOSIT);
+			if(method.equals("dw")) updateAccount(Account.DEPOSIT, Action.WITHDRAW);
+			if(method.equals("ld")) updateAccount(Account.LOAN, Action.DEPOSIT);
+			if(method.equals("ll")) updateAccount(Account.LOAN, Action.LOAN);
+			if(method.equals("od")) updateAccount(Account.OVERDRAFT, Action.DEPOSIT);
+			if(method.equals("ow")) updateAccount(Account.OVERDRAFT, Action.WITHDRAW);
 			amountView.setVisible(false);
 		}
 		else method = command;
