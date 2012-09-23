@@ -104,7 +104,6 @@ public class CustomerController implements ActionListener {
 		String command = ((JButton) e.getSource()).getName();
 		
 		amountView.setVisible(true);
-		amountView.getAmountField().setText("");
 		
 		if(command.equals("Submit")) {
 			if(method.equals("dd")) updateAccount(Account.DEPOSIT, Action.DEPOSIT);
@@ -113,6 +112,7 @@ public class CustomerController implements ActionListener {
 			if(method.equals("ll")) updateAccount(Account.LOAN, Action.LOAN);
 			if(method.equals("od")) updateAccount(Account.OVERDRAFT, Action.DEPOSIT);
 			if(method.equals("ow")) updateAccount(Account.OVERDRAFT, Action.WITHDRAW);
+			amountView.getAmountField().setText("");
 			amountView.setVisible(false);
 		}
 		else method = command;
