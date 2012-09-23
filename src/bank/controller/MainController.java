@@ -17,7 +17,7 @@ public class MainController implements ActionListener,WindowListener {
 	private SaveController saveController = new SaveController();
 	
 	public MainController() {
-		mainView = new MainView(this,saveController);
+		mainView = new MainView(this);
 	}
 	
 	public void bankViewButtonActionPerformed() {
@@ -48,7 +48,12 @@ public class MainController implements ActionListener,WindowListener {
 	}
 
 	public void windowClosing(WindowEvent arg0) {
-		mainView.setVisible(true);
+		if(arg0.getSource().getClass().getName().equals("bank.view.MainView")) {
+			saveController.writeFile();
+		}
+		else {
+			mainView.setVisible(true);
+		}
 	}
 	
 	public void windowActivated(WindowEvent arg0) {}

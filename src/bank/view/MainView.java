@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import bank.controller.MainController;
-import bank.controller.SaveController;
 
 /**
  * @authors Pierre Zabell, Jacob Pedersen
@@ -28,9 +27,9 @@ public class MainView extends javax.swing.JFrame {
 	private JButton customerViewButton;
 	private JPanel customerButtonContainer;
 	
-	public MainView(MainController mc, SaveController sc) {
+	public MainView(MainController mc) {
 		super();
-		this.addWindowListener(sc);
+		this.addWindowListener(mc);
 		mainController = mc;
 		initGUI();
 		setVisible(true);
