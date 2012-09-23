@@ -6,6 +6,10 @@ package bank.model;
 public class Account {
 	private double balance;
 	
+	/*
+	 * The account is the base class for all account types.
+	 * It has the basic methods that is common for every account type.
+	 */
 	public Account() {
 		balance = 0;
 	}

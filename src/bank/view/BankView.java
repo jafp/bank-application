@@ -52,6 +52,12 @@ public class BankView extends javax.swing.JFrame {
 	private JPanel buttonContainer;
 	private JPanel listContainer;
 	
+	/*
+	 * Super is called here, and that initializes JFrame.
+	 * Also we add the MainController as the JFrame's WindowListener.
+	 * The controller is saved as a reference, so we can use it later on as ActionListener.
+	 * The GUI is then being initialized and the window is set visible.
+	 */
 	public BankView(BankController bc, MainController mc) {
 		super();
 		this.addWindowListener(mc);
@@ -59,6 +65,10 @@ public class BankView extends javax.swing.JFrame {
 		initGUI();
 	}
 	
+	/*
+	 * This method sets up all our windows components, such as containers, buttons, lists etc.
+	 * Also here the Controller ActionListener is added to our button components.
+	 */
 	private void initGUI() {
 		try {
 			BoxLayout thisLayout = new BoxLayout(getContentPane(), javax.swing.BoxLayout.X_AXIS);
@@ -230,10 +240,17 @@ public class BankView extends javax.swing.JFrame {
 		}
 	}
 	
+	/*
+	 * This clears the TextField's when actions are performed.
+	 */
 	public void clearFields() {
 		nameField.setText("");
 		passwordField.setText("");
 		loanField.setText("");
 		overdraftField.setText("");
 	}
+	
+	/*
+	 * Below here we have getters and setters for the private fields.
+	 */
 }

@@ -22,12 +22,21 @@ public class AmountView extends javax.swing.JFrame {
 	private JLabel amountLabel;
 	private JButton submitAmount;
 	
+	/*
+	 * Super is called here, and that initializes JFrame.
+	 * The controller is saved as a reference, so we can use it later on as ActionListener.
+	 * The GUI is then being initialized and the window is set visible.
+	 */
 	public AmountView(CustomerController cc) {
 		super();
 		customerController = cc;
 		initGUI();
 	}
 	
+	/*
+	 * This method sets up all our windows components, such as containers, buttons, lists etc.
+	 * Also here the Controller ActionListener is added to our button components.
+	 */
 	private void initGUI() {
 		try {
 			BoxLayout thisLayout = new BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS);
@@ -63,6 +72,9 @@ public class AmountView extends javax.swing.JFrame {
 		}
 	}
 
+	/*
+	 * Below here we have getters and setters for the private fields.
+	 */
 	public JTextField getAmountField() {
 		return amountField;
 	}

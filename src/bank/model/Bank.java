@@ -9,6 +9,10 @@ public class Bank {
 	private static Bank instance;
 	private ArrayList<Customer> customers = new ArrayList<Customer>();
 	
+	/*
+	 * Creates a static Bank, so the information contained always is the same,
+	 * no matter where it is accessed from. There will always only be one object of Bank.
+	 */
 	public static Bank instance() {
 		if (instance == null) {
 			instance = new Bank();
@@ -16,6 +20,9 @@ public class Bank {
 		return instance;
 	}
 	
+	/*
+	 * Methods for handling data to and from the ArrayList.
+	 */
 	public void addCustomer(Customer customer) {
 		customers.add(customer);
 	}

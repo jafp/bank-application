@@ -16,15 +16,30 @@ public class LoginController implements ActionListener {
 	private Bank bankModel = Bank.instance();
 	private LoginView loginView;
 	
+	/*
+	 * A new LoginView is created, the ActionListener(this) is parsed into the LoginView.
+	 * Also the MainListener is parsed into LoginView, and saved for reference
+	 * so it also later in the code can be parsed into the CustomerController.
+	 */
 	public LoginController(MainController mc) {
 		mainController = mc;
 		loginView = new LoginView(this,mc);
 	}
 	
+	/*
+	 * This method is used by the MainController, so it can set the LoginView visible.
+	 * Because of the LoginView being private, and only accessible from the LoginController class.
+	 */
 	public void setVisible() {
 		loginView.setVisible(true);
 	}
 	
+	/*
+	 * Method for logging a customer into the system.
+	 * First its checked if the Bank has any customers saved in the Customer ArrayList.
+	 * If so, we run through the customer list, checking for a customer with the
+	 * same name and password as specified by the user.
+	 */
 	public void login() {
 		try {
 			boolean notFound = true;
@@ -51,6 +66,12 @@ public class LoginController implements ActionListener {
 		}	
 	}
 
+	/*
+	 * The actionPerformed is a method contained in the ActionListener interface.
+	 * We must have this method to receive our ActionEvent, when we perform an action on a object,
+	 * that has this listener added to it.
+	 * In this case we only listen to one button and perform the login method when pressed.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = new String(e.getActionCommand());

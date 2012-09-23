@@ -17,15 +17,30 @@ public class BankController implements ActionListener {
 	private BankView bankView;
 	private Bank bankModel = Bank.instance();
 	
+	/*
+	 * A new BankView is created, the ActionListener(this) and the WindowListener(mc),
+	 * is parsed into the BankView, and finally we update the customer list,
+	 * because we might have a saved file with customer information in store.
+	 */
 	public BankController(MainController mc) {
 		bankView = new BankView(this,mc);
 		updateList();
 	}
 	
+	/*
+	 * This method is used by the MainController, so it can set the BankView visible.
+	 * Because of the BankView being private, and only accessible from the BankController class.
+	 */
 	public void setVisible() {
 		bankView.setVisible(true);
 	}
 	
+	/*
+	 * This method is for adding new customers to our Bank(Model).
+	 * First of all we get the name of the customer, and check if such name already exists.
+	 * If we are clear to go, we create a new Customer object, and then add it to our ArrayList
+	 * of customers in the BankModel.
+	 */
 	public void addCustomer() {
 		try {
 			String name = bankView.nameField.getText();
@@ -62,6 +77,9 @@ public class BankController implements ActionListener {
 		}
 	}
 	
+	/*
+	 * Here we have a small method for deleting a given customer in the ArrayList for BankModel.
+	 */
 	public void deleteCustomer() {
 		String name = new String((String) bankView.customerList.getSelectedValue());
 		for(Customer c : bankModel.getCustomers()) {
@@ -73,6 +91,10 @@ public class BankController implements ActionListener {
 		}
 	}
 	
+	/*
+	 * This method is for updating the ListModel used by the List components in the BankView.
+	 * When this is called we refresh the list, so proper data will be displayed in the GUI.
+	 */
 	public void updateList() {
 		DefaultListModel<String> model = (DefaultListModel<String>) bankView.customerList.getModel();
 		model.clear();
@@ -81,6 +103,12 @@ public class BankController implements ActionListener {
 		}
 	}
 
+	/*
+	 * The actionPerformed is a method contained in the ActionListener interface.
+	 * We must have this method to receive our ActionEvent, when we perform an action on a object,
+	 * that has this listener added to it.
+	 * In this case we can either perform the addCustomer or deleteCustomer method.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = new String(e.getActionCommand());

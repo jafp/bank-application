@@ -14,12 +14,18 @@ import bank.view.CustomerView;
  */
 public class CustomerController implements ActionListener {
 	
+	/*
+	 * Constants for the different actions that can be performed on an account.
+	 */
 	private enum Action {
 		DEPOSIT,
 		WITHDRAW,
 		LOAN
 	};
 	
+	/*
+	 * Constants for the different accounts that the customer holds.
+	 */
 	private enum Account {
 		DEPOSIT,
 		LOAN,
@@ -32,6 +38,13 @@ public class CustomerController implements ActionListener {
 	
 	private String method;
 	
+	/*
+	 * A new CustomerView is created, the ActionListener(this) and the WindowListener(mc),
+	 * is parsed into the CustomerView, also we save the Customer(c) from the LoginController
+	 * so we know what data to load.
+	 * A AmountView is also created, so its there when its needed.
+	 * Then we set the CustomerView visible and update the fields with the customers data.
+	 */
 	public CustomerController(Customer c, MainController mc) {
 		customer = c;
 		customerView = new CustomerView(this,mc);
@@ -40,6 +53,12 @@ public class CustomerController implements ActionListener {
 		updateFields();
 	}
 	
+	/*
+	 * This method updates the customers account when a Action is performed on an Account.
+	 * It happens when the customer submit a Action in the AmountView, then the amount is fetched.
+	 * And two switches selects the Account, and then the Action to be performed.
+	 * The a method is then called in the customer object, and the amount is parsed as an parameter.
+	 */
 	public void updateAccount(Account account, Action method) {
 		double amount = Double.parseDouble(amountView.getAmountField().getText());
 		try {
@@ -90,6 +109,9 @@ public class CustomerController implements ActionListener {
 		}
 	}
 	
+	/*
+	 * This method updates the GUI label fields, with new data from the customer object.
+	 */
 	public void updateFields() {
 		customerView.getNameLabel().setText(customer.getName());
 		customerView.getDepositBalance().setText(Double.toString(customer.getDA().getBalance()));
@@ -98,6 +120,15 @@ public class CustomerController implements ActionListener {
 		customerView.getOverdraftLimit().setText(Double.toString(customer.getOA().getOverdraftLimit()));
 	}
 
+	/*
+	 * The actionPerformed is a method contained in the ActionListener interface.
+	 * We must have this method to receive our ActionEvent, when we perform an action on a object,
+	 * that has this listener added to it.
+	 * In this case we first get an action from the CustomerView, and depending on what button is pressed
+	 * a specific command is parsed into the method string, also the AmountView is set visible.
+	 * When the customer then submit an amount, the updateAccount parameters is different depending
+	 * on what the method is.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)  {
 		

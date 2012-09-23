@@ -19,6 +19,12 @@ public class SaveController {
 	private Customer customer;
 	private Bank bankModel = Bank.instance();
 
+	/*
+	 * When the SaveController is constructed, we find the path to the directory 
+	 * in which the program is located. Then we check for a file named bankdata,
+	 * if it dosen't exists we create a new file, but if we already have a bankdata file.
+	 * We call the loadFile method which will read data from the file.
+	 */
 	public SaveController() {
 		String rawPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		String path = rawPath.substring(0, rawPath.lastIndexOf("/")+1);
@@ -34,6 +40,11 @@ public class SaveController {
 		}
 	}
 	
+	/*
+	 * Uses the Scanner object to read from out bankdata file.
+	 * As long as the file has more information, we will continue to read.
+	 * The data is saved in the Bank Model ArrayList of customers.
+	 */
 	public void loadFile() {
 		try {
 			input = new Scanner(file);
@@ -58,6 +69,11 @@ public class SaveController {
 		}
 	}
 	
+	/*
+	 * When our program is closed, we will delete our previous bankdata file.
+	 * We will then create a new one, and use our PrintWriter object to 
+	 * write all new information to the file.
+	 */
 	public void writeFile() {
 		try{
 			file.delete();

@@ -27,6 +27,12 @@ public class MainView extends javax.swing.JFrame {
 	private JButton customerViewButton;
 	private JPanel customerButtonContainer;
 	
+	/*
+	 * Super is called here, and that initializes JFrame.
+	 * Also we add the MainController as the JFrame's WindowListener.
+	 * The controller is saved as a reference, so we can use it later on as ActionListener.
+	 * The GUI is then being initialized and the window is set visible.
+	 */
 	public MainView(MainController mc) {
 		super();
 		this.addWindowListener(mc);
@@ -35,6 +41,10 @@ public class MainView extends javax.swing.JFrame {
 		setVisible(true);
 	}
 	
+	/*
+	 * This method sets up all our windows components, such as containers, buttons, lists etc.
+	 * Also here the Controller ActionListener is added to our button components.
+	 */
 	private void initGUI() {
 		try {
 			BoxLayout thisLayout = new BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS);

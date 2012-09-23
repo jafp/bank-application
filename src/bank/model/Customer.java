@@ -11,6 +11,10 @@ public class Customer {
 	private LoanAccount loanAccount;
 	private OverdraftAccount overdraftAccount;
 	
+	/*
+	 * When the constructor is called a new customer is created.
+	 * It takes all parameters necessary to create all accounts, name & password.
+	 */
 	public Customer(String newName,String newPassword,double loanAmount, double overdraftLimit) {
 		name = newName;
 		password = newPassword;
@@ -19,6 +23,9 @@ public class Customer {
 		overdraftAccount = new OverdraftAccount(overdraftLimit);
 	}
 	
+	/*
+	 * Methods for getting customer information and accounts.
+	 */
 	public String getName() {
 		return name;
 	}

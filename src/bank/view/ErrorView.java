@@ -30,11 +30,19 @@ public class ErrorView extends javax.swing.JFrame {
 		});
 	}
 	
+	/*
+	 * Super is called here, and that initializes JFrame.
+	 * The GUI is then being initialized and the window is set visible.
+	 */
 	public ErrorView() {
 		super();
 		initGUI();
 	}
 	
+	/*
+	 * This method sets up all our windows components, such as containers, buttons, lists etc.
+	 * Also here the Controller ActionListener is added to our button components.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -57,5 +65,4 @@ public class ErrorView extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
-
 }
