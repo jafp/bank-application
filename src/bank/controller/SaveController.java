@@ -1,8 +1,12 @@
 package bank.controller;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import bank.model.Bank;
 import bank.model.Customer;
@@ -13,8 +17,8 @@ import bank.model.Customer;
 public class SaveController {
 	
 	private File file;
-	private Scanner input;
-	private PrintWriter output;
+	private ObjectInputStream input = null;
+	private ObjectOutputStream output = null;
 	
 	private Customer customer;
 	private Bank bankModel = Bank.instance();
@@ -41,60 +45,59 @@ public class SaveController {
 	}
 	
 	/*
-	 * Uses the Scanner object to read from out bankdata file.
+	 * We use the ObjectInputStream to read objects from our bankdata file.
 	 * As long as the file has more information, we will continue to read.
 	 * The data is saved in the Bank Model ArrayList of customers.
 	 */
 	public void loadFile() {
 		try {
-			input = new Scanner(file);
-			while(input.hasNext()) {
-				customer = new Customer(
-						input.next(),
-						input.next(),
-						input.nextDouble(),
-						input.nextDouble());
-				customer.getDA().deposit(input.nextDouble());
-				customer.getOA().deposit(input.nextDouble());
+			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
+			while(true) {
+				customer = (Customer) input.readObject();
 				bankModel.addCustomer(customer);
 			}
 		}
-		catch(IOException exc) {
-			new ErrorController(exc);
+		catch(Exception exc) {
+			
 		}
 		finally {
-			if(input != null) {
-				input.close();
+			try {
+				if(input != null) {
+					input.close();
+				}
+			}
+			catch (IOException exc) {
+				System.out.println(exc.getMessage());
 			}
 		}
 	}
 	
 	/*
 	 * When our program is closed, we will delete our previous bankdata file.
-	 * We will then create a new one, and use our PrintWriter object to 
-	 * write all new information to the file.
+	 * We will then create a new one, and use our ObjectOutputStream to 
+	 * write all new objects to the file.
 	 */
 	public void writeFile() {
 		try{
 			file.delete();
 			file.createNewFile();
-			output = new PrintWriter(file);
+			output = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
 			for(Customer c : bankModel.getCustomers()) {
-				output.print(c.getName()+" ");
-				output.print(c.getPassword()+" ");
-				output.print(-c.getLA().getBalance()+" ");
-				output.print(-c.getOA().getOverdraftLimit()+" ");
-				output.print(c.getDA().getBalance()+c.getLA().getBalance()+" ");
-				output.println(c.getOA().getBalance()+" ");
+				output.writeObject(c);
 			}
 		}
 		catch (IOException exc) {
-			new ErrorController(exc);
+			System.out.println(exc.getMessage());
 		}
 		finally {
-			if(output != null) {
-				output.close();
+			try {
+				if(output != null) {
+					output.close();
+				}
 			}
-		}	
+			catch (IOException exc) {
+				new ErrorController(exc);
+			}	
+		}
 	}
 }

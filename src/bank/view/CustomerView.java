@@ -3,7 +3,9 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -11,6 +13,19 @@ import javax.swing.WindowConstants;
 import bank.controller.CustomerController;
 import bank.controller.MainController;
 
+
+/**
+* This code was edited or generated using CloudGarden's Jigloo
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
+* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
+* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+*/
 /**
  * @authors Pierre Zabell, Jacob Pedersen
  */
@@ -25,8 +40,7 @@ public class CustomerView extends javax.swing.JFrame {
 	
 	/** The controller responsible for this view */
 	private CustomerController customerController;
-	
-	private JLabel nameLabel;
+
 	private JLabel depositBalance;
 	private JLabel loanBalance;
 	private JLabel overdraftBalance;
@@ -40,6 +54,11 @@ public class CustomerView extends javax.swing.JFrame {
 	private JPanel loanFunctionContainer;
 	private JLabel loanLabel;
 	private JPanel loanContainer;
+	private JLabel accountsLabel;
+	private JLabel nameLabel;
+	private JComboBox<String> accountList;
+	private JPanel accountsContainer;
+	private JPanel welcomeContainer;
 	private JPanel loanBalanceContainer;
 	private JPanel overdraftBalanceContainer;
 	private JPanel depositBalanceContainer;
@@ -87,17 +106,46 @@ public class CustomerView extends javax.swing.JFrame {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{
 				headerContainer = new JPanel();
+				BoxLayout headerContainerLayout = new BoxLayout(headerContainer, javax.swing.BoxLayout.X_AXIS);
+				headerContainer.setLayout(headerContainerLayout);
 				getContentPane().add(headerContainer);
 				{
-					welcomeLabel = new JLabel();
-			
-					headerContainer.add(welcomeLabel);
-					welcomeLabel.setText("Welcome");
+					welcomeContainer = new JPanel();
+					headerContainer.add(welcomeContainer);
+					FlowLayout welcomeContainerLayout = new FlowLayout();
+					welcomeContainerLayout.setAlignment(FlowLayout.LEFT);
+					welcomeContainer.setLayout(welcomeContainerLayout);
+					{
+						welcomeLabel = new JLabel();
+						welcomeContainer.add(welcomeLabel);
+
+						welcomeLabel.setText("Welcome");
+					}
+					{
+						nameLabel = new JLabel();
+						welcomeContainer.add(nameLabel);
+						nameLabel.setText("<name>");
+					}
 				}
 				{
-					setNameLabel(new JLabel());
-					headerContainer.add(getNameLabel());
-					getNameLabel().setText("<name>");
+					accountsContainer = new JPanel();
+					headerContainer.add(accountsContainer);
+					FlowLayout accountsContainerLayout = new FlowLayout();
+					accountsContainerLayout.setAlignment(FlowLayout.RIGHT);
+					accountsContainer.setLayout(accountsContainerLayout);
+					{
+						accountsLabel = new JLabel();
+						accountsContainer.add(accountsLabel);
+						accountsLabel.setText("Accounts:");
+					}
+					{
+						DefaultComboBoxModel<String> accountsListModel = 
+								new DefaultComboBoxModel<String>();
+						accountList = new JComboBox<String>();
+						accountsContainer.add(accountList);
+						accountList.setModel(accountsListModel);
+						accountList.addPopupMenuListener(customerController);
+					}
 				}
 			}
 			{
@@ -332,7 +380,6 @@ public class CustomerView extends javax.swing.JFrame {
 	}
 
 	public void setNameLabel(JLabel nameLabel) {
-		this.nameLabel = nameLabel;
 	}
 
 	public JLabel getDepositBalance() {
@@ -365,5 +412,9 @@ public class CustomerView extends javax.swing.JFrame {
 
 	public void setOverdraftLimit(JLabel overdraftLimit) {
 		this.overdraftLimit = overdraftLimit;
+	}
+	
+	public JComboBox<String> getAccountList() {
+		return accountList;
 	}
 }

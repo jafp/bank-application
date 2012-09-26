@@ -2,17 +2,21 @@ package bank.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import bank.model.BankException;
 import bank.model.Customer;
+import bank.model.MasterAccount;
 import bank.view.AmountView;
 import bank.view.CustomerView;
 
 /**
  * @authors Pierre Zabell, Jacob Pedersen
  */
-public class CustomerController implements ActionListener {
+public class CustomerController implements ActionListener,PopupMenuListener {
 	
 	/*
 	 * Constants for the different actions that can be performed on an account.
@@ -50,6 +54,12 @@ public class CustomerController implements ActionListener {
 		customerView = new CustomerView(this,mc);
 		amountView = new AmountView(this);
 		customerView.setVisible(true);
+		DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) customerView.getAccountList().getModel();
+		model.removeAllElements();
+		for(MasterAccount ma : c.getAccounts()) {
+			model.addElement(ma.getName());
+		}
+		customer.setActiveAccount(0);
 		updateFields();
 	}
 	
@@ -148,4 +158,16 @@ public class CustomerController implements ActionListener {
 		}
 		else method = command;
 	}
+
+	/*
+	 * Listener on the JComboBox list, that knows when we have selected an account.
+	 */
+	public void popupMenuWillBecomeInvisible(PopupMenuEvent arg0) {
+		customer.setActiveAccount(customerView.getAccountList().getSelectedIndex());
+		updateFields();
+		
+	}
+
+	public void popupMenuCanceled(PopupMenuEvent arg0) {}
+	public void popupMenuWillBecomeVisible(PopupMenuEvent arg0) {}
 }

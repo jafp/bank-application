@@ -1,9 +1,15 @@
 package bank.model;
 
+import java.io.Serializable;
+
 /**
  * @authors Pierre Zabell, Jacob Pedersen
  */
-public class Account {
+public class Account implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double balance;
 	
 	/*
@@ -19,6 +25,10 @@ public class Account {
 	}
 	
 	public void setBalance(double amount) {
+		balance = amount;
+	}
+	
+	public void addAmount(double amount) {
 		balance = balance + amount;
 	}
 	

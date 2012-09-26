@@ -1,10 +1,16 @@
 package bank.model;
 
+import java.io.Serializable;
+
 /**
  * @authors Pierre Zabell, Jacob Pedersen
  */
-public class LoanAccount extends Account implements Depositable {
+public class LoanAccount extends Account implements Serializable, Depositable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Account account;
 	private DepositAccount targetAccount;
 	
@@ -30,7 +36,7 @@ public class LoanAccount extends Account implements Depositable {
 			}
 			else {
 				targetAccount.withdraw(amount);
-				account.setBalance(amount);
+				account.addAmount(amount);
 			}
 	}
 	
@@ -39,7 +45,7 @@ public class LoanAccount extends Account implements Depositable {
 	 * and put into the reference account, the loan account would be negative.
 	 */
 	public void loan(double amount) {
-		account.setBalance(-amount);
+		account.addAmount(-amount);
 		targetAccount.deposit(amount);
 	}
 	
@@ -48,5 +54,10 @@ public class LoanAccount extends Account implements Depositable {
 	 */
 	public double getBalance() {
 		return account.getBalance();
+	}
+	
+	public void setBalance(double amount) {
+		targetAccount.deposit(getBalance()+amount);
+		account.setBalance(-amount);
 	}
 }

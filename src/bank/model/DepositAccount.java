@@ -1,10 +1,16 @@
 package bank.model;
 
+import java.io.Serializable;
+
 /**
  * @authors Pierre Zabell, Jacob Pedersen
  */
-public class DepositAccount extends Account implements Depositable,Withdrawable {
+public class DepositAccount extends Account implements Serializable, Depositable,Withdrawable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Account account = new Account();
 	
 	/*
@@ -12,7 +18,7 @@ public class DepositAccount extends Account implements Depositable,Withdrawable 
 	 * then the amount is added to the total sum.
 	 */
 	public void deposit(double amount) {
-		account.setBalance(amount);
+		account.addAmount(amount);
 	}
 	
 	/*
@@ -25,7 +31,7 @@ public class DepositAccount extends Account implements Depositable,Withdrawable 
 				throw new BankException("Insufficient Funds!");
 			}
 			else {
-				account.setBalance(-amount);
+				account.addAmount(-amount);
 			}
 	}
 	

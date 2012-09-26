@@ -1,10 +1,16 @@
 package bank.model;
 
+import java.io.Serializable;
+
 /**
  * @authors Pierre Zabell, Jacob Pedersen
  */
-public class OverdraftAccount extends Account implements Depositable,Withdrawable {
+public class OverdraftAccount extends Account implements Serializable, Depositable,Withdrawable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Account account = new Account();
 	private double overdraftLimit;
 	
@@ -21,7 +27,7 @@ public class OverdraftAccount extends Account implements Depositable,Withdrawabl
 	 */
 	@Override
 	public void deposit(double amount) {
-		account.setBalance(amount);
+		account.addAmount(amount);
 	}
 	
 	/*
@@ -34,7 +40,7 @@ public class OverdraftAccount extends Account implements Depositable,Withdrawabl
 				throw new BankException("Overdraft limit reached!");
 			}
 			else {
-				account.setBalance(-amount);
+				account.addAmount(-amount);
 			}
 	}
 	

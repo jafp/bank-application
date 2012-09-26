@@ -1,21 +1,35 @@
 package bank.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 import bank.model.Bank;
 import bank.model.BankException;
 import bank.model.Customer;
+import bank.model.MasterAccount;
 import bank.view.BankView;
 
 /**
  * @authors Pierre Zabell, Jacob Pedersen
  */
-public class BankController implements ActionListener {
+public class BankController implements ActionListener,MouseListener,FocusListener {
+	
+	private enum ActiveList {
+		CUSTOMERLIST,
+		ACCOUNTLIST,
+		NONE
+	}
 	
 	private BankView bankView;
 	private Bank bankModel = Bank.instance();
+	private ActiveList activeList;
+	private Customer activeCustomer;
 	
 	/*
 	 * A new BankView is created, the ActionListener(this) and the WindowListener(mc),
@@ -24,7 +38,7 @@ public class BankController implements ActionListener {
 	 */
 	public BankController(MainController mc) {
 		bankView = new BankView(this,mc);
-		updateList();
+		updateGUI();
 	}
 	
 	/*
@@ -33,6 +47,19 @@ public class BankController implements ActionListener {
 	 */
 	public void setVisible() {
 		bankView.setVisible(true);
+		updateGUI();
+	}
+	
+	/*
+	 * Helper method, for finding the correct customer object.
+	 */
+	public Customer findCustomer(String name) {
+		for(Customer c : bankModel.getCustomers()) {
+			if(c.getName().equals(name)) {
+				return c;
+			}
+		}
+		return null;
 	}
 	
 	/*
@@ -44,24 +71,31 @@ public class BankController implements ActionListener {
 	public void addCustomer() {
 		try {
 			String name = bankView.nameField.getText();
-			boolean alreadyExists = false;
-			for(Customer c : bankModel.getCustomers()) {
-				if(c.getName().toLowerCase().equals(name.toLowerCase())) {
-					alreadyExists = true;
+			Customer customer = findCustomer(name);
+			if(customer != null) {
+				String accountName = bankView.accountField.getText();
+				if(customer.getActiveAccount().getName().toLowerCase().equals(accountName.toLowerCase())) {
+					throw new BankException("Customer with that name and account name already exists!");
 				}
-			}
-			if(alreadyExists == true) {
-				throw new BankException("A customer with the name " + name + " already exists!");
+				else {
+					customer.newMasterAccount(
+							accountName, 
+							Double.parseDouble(bankView.loanField.getText()), 
+							Double.parseDouble(bankView.overdraftField.getText())
+							);
+				}
 			}
 			else {
 				try {
 					Customer newCustomer = new Customer(
 							name,
 							new String(bankView.passwordField.getPassword()),
+							new String(bankView.accountField.getText()),
 							Double.parseDouble(bankView.loanField.getText()),
 							Double.parseDouble(bankView.overdraftField.getText())
 							);
 					bankModel.addCustomer(newCustomer);
+					activeCustomer = null;
 				}
 				catch (Exception e)  {
 					throw new BankException("All fields needs to be filled!");
@@ -72,8 +106,7 @@ public class BankController implements ActionListener {
 			new ErrorController(e);
 		}
 		finally {
-			bankView.clearFields();
-			updateList();
+			updateGUI();
 		}
 	}
 	
@@ -81,25 +114,65 @@ public class BankController implements ActionListener {
 	 * Here we have a small method for deleting a given customer in the ArrayList for BankModel.
 	 */
 	public void deleteCustomer() {
-		String name = new String((String) bankView.customerList.getSelectedValue());
-		for(Customer c : bankModel.getCustomers()) {
-			if(c.getName().equals(name)) {
-				bankModel.deleteCustomer(c);
-				updateList();
-				return;
-			}
+		if(activeCustomer.getAccounts().size() > 1) {
+			activeCustomer.removeActiveAccount();
 		}
+		else {
+			//activeCustomer.removeActiveAccount();
+			bankModel.deleteCustomer(activeCustomer);
+			activeCustomer = null;
+		}
+		updateGUI();
 	}
 	
 	/*
-	 * This method is for updating the ListModel used by the List components in the BankView.
-	 * When this is called we refresh the list, so proper data will be displayed in the GUI.
+	 * Updates information for an active customer and a selected account.
 	 */
-	public void updateList() {
-		DefaultListModel<String> model = (DefaultListModel<String>) bankView.customerList.getModel();
-		model.clear();
-		for(Customer c : bankModel.getCustomers()) {
-			model.addElement(c.getName());
+	public void updateAccount() {
+		activeCustomer.setName(bankView.nameField.getText());
+		activeCustomer.setPassword(new String(bankView.passwordField.getPassword()));
+		activeCustomer.getActiveAccount().setName(bankView.accountField.getText());
+		activeCustomer.getActiveAccount().getLA().setBalance(
+				Double.parseDouble(bankView.loanField.getText()));
+		updateGUI();
+	}
+	
+	/*
+	 * This method is for updating the ListModels used by the List components in the BankView.
+	 * When this is called we refresh the list, so proper data will be displayed in the GUI.
+	 * Also the fields are cleared or set, according to what customer is selected.
+	 */
+	public void updateGUI() {
+		if(activeCustomer != null) {
+			bankView.nameField.setText(activeCustomer.getName());
+			bankView.passwordField.setText(activeCustomer.getPassword());
+			bankView.accountField.setText(activeCustomer.getActiveAccount().getName());
+			bankView.loanField.setText(Double.toString(-activeCustomer.getLA().getBalance()));
+			bankView.overdraftField.setText(Double.toString(-activeCustomer.getOA().getOverdraftLimit()));
+		}
+		else {
+			bankView.clearFields();
+		}
+		if(activeList != ActiveList.CUSTOMERLIST) {
+			DefaultListModel<String> customerModel = (DefaultListModel<String>) bankView.customerList.getModel();
+			customerModel.clear();
+			for(Customer c : bankModel.getCustomers()) {
+				customerModel.addElement(c.getName());
+			}
+		}
+		if(activeList != ActiveList.ACCOUNTLIST) {
+			DefaultListModel<String> accountModel = (DefaultListModel<String>) bankView.accountList.getModel();
+			accountModel.clear();
+			if(activeCustomer != null) {
+				for(MasterAccount ma : activeCustomer.getAccounts()) {
+					accountModel.addElement(
+							ma.getName()+" - "
+							+"Deposit:"+ma.getDA().getBalance()+" "
+							+"Loan:"+ma.getLA().getBalance()+" "
+							+"Overdraft:"+ma.getOA().getBalance()
+							);
+				}
+			}
 		}
 	}
 
@@ -112,7 +185,56 @@ public class BankController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = new String(e.getActionCommand());
+		activeList = ActiveList.NONE;
 		if(command.equals("Add")) addCustomer();
 		else if(command.equals("Delete")) deleteCustomer();
+		else if(command.equals("Update")) updateAccount();
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		if(activeList == ActiveList.CUSTOMERLIST) {
+			try {
+				if(bankModel.getCustomers().size() == 0) {
+					throw new BankException("No customers in system!");
+				}
+				else {
+					activeCustomer = findCustomer(bankView.customerList.getSelectedValue());
+					updateGUI();
+				}
+			}
+			catch(BankException e) {
+				new ErrorController(e);
+			}
+		}
+		else if(activeList == ActiveList.ACCOUNTLIST) {
+			try {
+				if(activeCustomer == null) {
+					throw new BankException("No Customer Selected!");
+				}
+				activeCustomer.setActiveAccount(bankView.accountList.getSelectedIndex());
+				updateGUI();
+			}
+			catch(BankException e) {
+				new ErrorController(e);
+			}
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void focusGained(FocusEvent arg0) {
+		String name = ((JList<String>) arg0.getSource()).getName();
+		if(name.equals("customerList")) {
+			activeList = ActiveList.CUSTOMERLIST;
+		}
+		else if(name.equals("accountList")) {
+			activeList = ActiveList.ACCOUNTLIST;
+		}
+	}
+
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mousePressed(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
+	public void focusLost(FocusEvent arg0) {}
 }
