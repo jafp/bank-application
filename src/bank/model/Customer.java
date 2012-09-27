@@ -7,13 +7,10 @@ import java.util.ArrayList;
  * @authors Pierre Zabell, Jacob Pedersen
  */
 public class Customer implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String name;
-	private String password;
 	
+	private static final long serialVersionUID = -3190205007515579742L;
+	private String name;
+	private String password;	
 	private ArrayList<MasterAccount> masterAccounts = new ArrayList<MasterAccount>();
 	private int activeAccount;
 	

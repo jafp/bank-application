@@ -5,12 +5,9 @@ import java.io.Serializable;
 /**
  * @authors Pierre Zabell, Jacob Pedersen
  */
-public class DepositAccount extends Account implements Serializable, Depositable,Withdrawable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class DepositAccount extends Account implements Serializable, Depositable, Withdrawable {
+
+	private static final long serialVersionUID = -4305592419123878068L;
 	private Account account = new Account();
 	
 	/*

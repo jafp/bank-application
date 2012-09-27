@@ -20,10 +20,8 @@ public class LoginView extends javax.swing.JFrame {
 	private static final long serialVersionUID = -3266899153926274082L;
 	
 	private LoginController loginController;
-	
-	public JTextField nameField;
-	public JPasswordField passwordField;
-	
+	private JTextField nameField;
+	private JPasswordField passwordField;
 	private JPanel nameContainer;
 	private JButton loginButton;
 	private JPanel loginContainer;
@@ -67,11 +65,11 @@ public class LoginView extends javax.swing.JFrame {
 					nameLabel.setPreferredSize(new java.awt.Dimension(100, 20));
 				}
 				{
-					nameField = new JTextField();
+					setNameField(new JTextField());
 					FlowLayout jTextField1Layout = new FlowLayout();
-					nameField.setLayout(jTextField1Layout);
-					nameContainer.add(nameField);
-					nameField.setPreferredSize(new java.awt.Dimension(250, 30));
+					getNameField().setLayout(jTextField1Layout);
+					nameContainer.add(getNameField());
+					getNameField().setPreferredSize(new java.awt.Dimension(250, 30));
 				}
 			}
 			{
@@ -112,11 +110,23 @@ public class LoginView extends javax.swing.JFrame {
 		return passwordContainer;
 	}
 	
-	private JPasswordField getPasswordField() {
+	public JPasswordField getPasswordField() {
 		if(passwordField == null) {
 			passwordField = new JPasswordField();
 			passwordField.setPreferredSize(new java.awt.Dimension(250, 30));
 		}
 		return passwordField;
+	}
+
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	public void setNameField(JTextField nameField) {
+		this.nameField = nameField;
+	}
+
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
 	}
 }

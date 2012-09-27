@@ -14,10 +14,7 @@ import bank.controller.MainController;
  */
 public class MainView extends javax.swing.JFrame {
 
-	private static final long serialVersionUID = 7775858109106280751L;
-	
 	private MainController mainController;
-	
 	private JPanel bankButtonContainer;
 	private JButton bankViewButton;
 	private JLabel creditsLabel;

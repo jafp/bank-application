@@ -70,18 +70,18 @@ public class BankController implements ActionListener,MouseListener,FocusListene
 	 */
 	public void addCustomer() {
 		try {
-			String name = bankView.nameField.getText();
+			String name = bankView.getNameField().getText();
 			Customer customer = findCustomer(name);
 			if(customer != null) {
-				String accountName = bankView.accountField.getText();
+				String accountName = bankView.getAccountField().getText();
 				if(customer.getActiveAccount().getName().toLowerCase().equals(accountName.toLowerCase())) {
 					throw new BankException("Customer with that name and account name already exists!");
 				}
 				else {
 					customer.newMasterAccount(
 							accountName, 
-							Double.parseDouble(bankView.loanField.getText()), 
-							Double.parseDouble(bankView.overdraftField.getText())
+							Double.parseDouble(bankView.getLoanField().getText()), 
+							Double.parseDouble(bankView.getOverdraftField().getText())
 							);
 				}
 			}
@@ -89,10 +89,10 @@ public class BankController implements ActionListener,MouseListener,FocusListene
 				try {
 					Customer newCustomer = new Customer(
 							name,
-							new String(bankView.passwordField.getPassword()),
-							new String(bankView.accountField.getText()),
-							Double.parseDouble(bankView.loanField.getText()),
-							Double.parseDouble(bankView.overdraftField.getText())
+							new String(bankView.getPasswordField().getPassword()),
+							new String(bankView.getAccountField().getText()),
+							Double.parseDouble(bankView.getLoanField().getText()),
+							Double.parseDouble(bankView.getOverdraftField().getText())
 							);
 					bankModel.addCustomer(newCustomer);
 					activeCustomer = null;
@@ -129,11 +129,11 @@ public class BankController implements ActionListener,MouseListener,FocusListene
 	 * Updates information for an active customer and a selected account.
 	 */
 	public void updateAccount() {
-		activeCustomer.setName(bankView.nameField.getText());
-		activeCustomer.setPassword(new String(bankView.passwordField.getPassword()));
-		activeCustomer.getActiveAccount().setName(bankView.accountField.getText());
+		activeCustomer.setName(bankView.getNameField().getText());
+		activeCustomer.setPassword(new String(bankView.getPasswordField().getPassword()));
+		activeCustomer.getActiveAccount().setName(bankView.getAccountField().getText());
 		activeCustomer.getActiveAccount().getLA().setBalance(
-				Double.parseDouble(bankView.loanField.getText()));
+				Double.parseDouble(bankView.getLoanField().getText()));
 		updateGUI();
 	}
 	
@@ -144,24 +144,24 @@ public class BankController implements ActionListener,MouseListener,FocusListene
 	 */
 	public void updateGUI() {
 		if(activeCustomer != null) {
-			bankView.nameField.setText(activeCustomer.getName());
-			bankView.passwordField.setText(activeCustomer.getPassword());
-			bankView.accountField.setText(activeCustomer.getActiveAccount().getName());
-			bankView.loanField.setText(Double.toString(-activeCustomer.getLA().getBalance()));
-			bankView.overdraftField.setText(Double.toString(-activeCustomer.getOA().getOverdraftLimit()));
+			bankView.getNameField().setText(activeCustomer.getName());
+			bankView.getPasswordField().setText(activeCustomer.getPassword());
+			bankView.getAccountField().setText(activeCustomer.getActiveAccount().getName());
+			bankView.getLoanField().setText(Double.toString(-activeCustomer.getLA().getBalance()));
+			bankView.getOverdraftField().setText(Double.toString(-activeCustomer.getOA().getOverdraftLimit()));
 		}
 		else {
 			bankView.clearFields();
 		}
 		if(activeList != ActiveList.CUSTOMERLIST) {
-			DefaultListModel<String> customerModel = (DefaultListModel<String>) bankView.customerList.getModel();
+			DefaultListModel<String> customerModel = (DefaultListModel<String>) bankView.getCustomerList().getModel();
 			customerModel.clear();
 			for(Customer c : bankModel.getCustomers()) {
 				customerModel.addElement(c.getName());
 			}
 		}
 		if(activeList != ActiveList.ACCOUNTLIST) {
-			DefaultListModel<String> accountModel = (DefaultListModel<String>) bankView.accountList.getModel();
+			DefaultListModel<String> accountModel = (DefaultListModel<String>) bankView.getAccountList().getModel();
 			accountModel.clear();
 			if(activeCustomer != null) {
 				for(MasterAccount ma : activeCustomer.getAccounts()) {
@@ -199,7 +199,7 @@ public class BankController implements ActionListener,MouseListener,FocusListene
 					throw new BankException("No customers in system!");
 				}
 				else {
-					activeCustomer = findCustomer(bankView.customerList.getSelectedValue());
+					activeCustomer = findCustomer(bankView.getCustomerList().getSelectedValue());
 					updateGUI();
 				}
 			}
@@ -212,7 +212,7 @@ public class BankController implements ActionListener,MouseListener,FocusListene
 				if(activeCustomer == null) {
 					throw new BankException("No Customer Selected!");
 				}
-				activeCustomer.setActiveAccount(bankView.accountList.getSelectedIndex());
+				activeCustomer.setActiveAccount(bankView.getAccountList().getSelectedIndex());
 				updateGUI();
 			}
 			catch(BankException e) {

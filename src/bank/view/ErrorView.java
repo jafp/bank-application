@@ -14,7 +14,6 @@ public class ErrorView extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	public JLabel errorMessage;
-	
 	private JPanel messageContainer;
 
 	/**

@@ -7,10 +7,7 @@ import java.io.Serializable;
  */
 public class LoanAccount extends Account implements Serializable, Depositable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7111104689969231658L;
 	private Account account;
 	private DepositAccount targetAccount;
 	

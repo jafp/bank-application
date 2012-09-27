@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MasterAccount implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8295246216654490918L;
 	private String name;
 	private DepositAccount depositAccount;
 	private LoanAccount loanAccount;

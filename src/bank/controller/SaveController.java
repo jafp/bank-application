@@ -53,12 +53,17 @@ public class SaveController {
 		try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
 			while(true) {
-				customer = (Customer) input.readObject();
-				bankModel.addCustomer(customer);
+				Object obj = input.readObject();
+				if (obj != null) {
+					customer = (Customer) obj;
+					bankModel.addCustomer(customer);
+				} else {
+					break;
+				}
 			}
 		}
 		catch(Exception exc) {
-			
+			System.out.println(exc.getMessage());
 		}
 		finally {
 			try {

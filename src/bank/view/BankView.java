@@ -37,14 +37,13 @@ public class BankView extends javax.swing.JFrame {
 	
 	private BankController bankController;
 
-	public JTextField nameField;
-	public JPasswordField passwordField;
-	public JTextField loanField;
-	public JTextField overdraftField;
-	public JList<String> customerList;
-	public JTextField accountField;
-	public JList<String> accountList;
-	
+	private JTextField nameField;
+	private JPasswordField passwordField;
+	private JTextField loanField;
+	private JTextField overdraftField;
+	private JList<String> customerList;
+	private JTextField accountField;
+	private JList<String> accountList;
 	private JPanel functionContainer;
 	private JPanel overdraftFieldContainer;
 	private JPanel overdraftLabelContainer;
@@ -155,9 +154,9 @@ public class BankView extends javax.swing.JFrame {
 							nameContainer.add(nameFieldContainer);
 							nameFieldContainer.setLayout(jPanel7Layout);
 							{
-								nameField = new JTextField();
-								nameFieldContainer.add(nameField);
-								nameField.setPreferredSize(new java.awt.Dimension(120, 22));
+								setNameField(new JTextField());
+								nameFieldContainer.add(getNameField());
+								getNameField().setPreferredSize(new java.awt.Dimension(120, 22));
 							}
 						}
 					}
@@ -185,9 +184,9 @@ public class BankView extends javax.swing.JFrame {
 							passwordContainer.add(passwordFieldContainer);
 							passwordFieldContainer.setLayout(jPanel9Layout);
 							{
-								passwordField = new JPasswordField();
-								passwordFieldContainer.add(passwordField);
-								passwordField.setPreferredSize(new java.awt.Dimension(120, 22));
+								setPasswordField(new JPasswordField());
+								passwordFieldContainer.add(getPasswordField());
+								getPasswordField().setPreferredSize(new java.awt.Dimension(120, 22));
 							}
 						}
 					}
@@ -215,9 +214,9 @@ public class BankView extends javax.swing.JFrame {
 							accountFieldContainerLayout.setAlignment(FlowLayout.RIGHT);
 							accountFieldContainer.setLayout(accountFieldContainerLayout);
 							{
-								accountField = new JTextField();
-								accountFieldContainer.add(accountField);
-								accountField.setPreferredSize(new java.awt.Dimension(120, 22));
+								setAccountField(new JTextField());
+								accountFieldContainer.add(getAccountField());
+								getAccountField().setPreferredSize(new java.awt.Dimension(120, 22));
 							}
 						}
 					}
@@ -245,9 +244,9 @@ public class BankView extends javax.swing.JFrame {
 							loanContainer.add(loanFieldContainer);
 							loanFieldContainer.setLayout(jPanel11Layout);
 							{
-								loanField = new JTextField();
-								loanFieldContainer.add(loanField);
-								loanField.setPreferredSize(new java.awt.Dimension(120, 22));
+								setLoanField(new JTextField());
+								loanFieldContainer.add(getLoanField());
+								getLoanField().setPreferredSize(new java.awt.Dimension(120, 22));
 							}
 						}
 					}
@@ -275,9 +274,9 @@ public class BankView extends javax.swing.JFrame {
 							overdraftContainer.add(overdraftFieldContainer);
 							overdraftFieldContainer.setLayout(jPanel13Layout);
 							{
-								overdraftField = new JTextField();
-								overdraftFieldContainer.add(overdraftField);
-								overdraftField.setPreferredSize(new java.awt.Dimension(120, 22));
+								setOverdraftField(new JTextField());
+								overdraftFieldContainer.add(getOverdraftField());
+								getOverdraftField().setPreferredSize(new java.awt.Dimension(120, 22));
 							}
 						}
 					}
@@ -291,14 +290,14 @@ public class BankView extends javax.swing.JFrame {
 					{
 						DefaultListModel<String> customerListModel = new DefaultListModel<String>();
 						
-						customerList = new JList<String>();
-						listContainer.add(customerList, BorderLayout.CENTER);
+						setCustomerList(new JList<String>());
+						listContainer.add(getCustomerList(), BorderLayout.CENTER);
 						listContainer.add(getCustomerLabel(), BorderLayout.NORTH);
-						customerList.setModel(customerListModel);
-						customerList.setPreferredSize(new java.awt.Dimension(161, 252));
-						customerList.addMouseListener(bankController);
-						customerList.addFocusListener(bankController);
-						customerList.setName("customerList");
+						getCustomerList().setModel(customerListModel);
+						getCustomerList().setPreferredSize(new java.awt.Dimension(161, 252));
+						getCustomerList().addMouseListener(bankController);
+						getCustomerList().addFocusListener(bankController);
+						getCustomerList().setName("customerList");
 					}
 				}
 			}
@@ -317,11 +316,11 @@ public class BankView extends javax.swing.JFrame {
 	 * This clears the TextField's when actions are performed.
 	 */
 	public void clearFields() {
-		nameField.setText("");
-		passwordField.setText("");
-		accountField.setText("");
-		loanField.setText("");
-		overdraftField.setText("");
+		getNameField().setText("");
+		getPasswordField().setText("");
+		getAccountField().setText("");
+		getLoanField().setText("");
+		getOverdraftField().setText("");
 	}
 	
 	private JPanel getAccountsContainer() {
@@ -332,14 +331,14 @@ public class BankView extends javax.swing.JFrame {
 			accountsContainer.setPreferredSize(new java.awt.Dimension(431, 53));
 			{
 				DefaultListModel<String> accountListModel = new DefaultListModel<String>();
-				accountList = new JList<String>();
-				accountsContainer.add(accountList, BorderLayout.CENTER);
+				setAccountList(new JList<String>());
+				accountsContainer.add(getAccountList(), BorderLayout.CENTER);
 				accountsContainer.add(getAccountsLabel(), BorderLayout.NORTH);
-				accountList.setModel(accountListModel);
-				accountList.setPreferredSize(new java.awt.Dimension(423, 94));
-				accountList.addMouseListener(bankController);
-				accountList.addFocusListener(bankController);
-				accountList.setName("accountList");
+				getAccountList().setModel(accountListModel);
+				getAccountList().setPreferredSize(new java.awt.Dimension(423, 94));
+				getAccountList().addMouseListener(bankController);
+				getAccountList().addFocusListener(bankController);
+				getAccountList().setName("accountList");
 			}
 		}
 		return accountsContainer;
@@ -359,6 +358,62 @@ public class BankView extends javax.swing.JFrame {
 			accountsLabel.setText("Accounts:");
 		}
 		return accountsLabel;
+	}
+
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	public void setNameField(JTextField nameField) {
+		this.nameField = nameField;
+	}
+
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
+	}
+
+	public JTextField getLoanField() {
+		return loanField;
+	}
+
+	public void setLoanField(JTextField loanField) {
+		this.loanField = loanField;
+	}
+
+	public JTextField getOverdraftField() {
+		return overdraftField;
+	}
+
+	public void setOverdraftField(JTextField overdraftField) {
+		this.overdraftField = overdraftField;
+	}
+
+	public JList<String> getCustomerList() {
+		return customerList;
+	}
+
+	public void setCustomerList(JList<String> customerList) {
+		this.customerList = customerList;
+	}
+
+	public JTextField getAccountField() {
+		return accountField;
+	}
+
+	public void setAccountField(JTextField accountField) {
+		this.accountField = accountField;
+	}
+
+	public JList<String> getAccountList() {
+		return accountList;
+	}
+
+	public void setAccountList(JList<String> accountList) {
+		this.accountList = accountList;
 	}
 
 	/*

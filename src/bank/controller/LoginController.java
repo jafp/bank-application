@@ -46,8 +46,8 @@ public class LoginController implements ActionListener {
 			if(bankModel.getCustomers().size() != 0) {
 				for(Customer c : bankModel.getCustomers()) {
 					if(
-						loginView.nameField.getText().toLowerCase().equals(c.getName().toLowerCase()) && 
-						new String(loginView.passwordField.getPassword()).equals(c.getPassword())) {
+						loginView.getNameField().getText().toLowerCase().equals(c.getName().toLowerCase()) && 
+						new String(loginView.getPasswordField().getPassword()).equals(c.getPassword())) {
 						notFound = false;
 						new CustomerController(c,mainController);
 						loginView.setVisible(false);

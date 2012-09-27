@@ -7,10 +7,7 @@ import java.io.Serializable;
  */
 public class OverdraftAccount extends Account implements Serializable, Depositable,Withdrawable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -540971148120989388L;
 	private Account account = new Account();
 	private double overdraftLimit;
 	
